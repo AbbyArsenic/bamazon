@@ -1,7 +1,7 @@
 # bamazon
 Node.js and MySQL HW Week12
 
-## Challenge 1
+## Challenge 1: Customer View
 
 **Step 1** 
 
@@ -29,5 +29,9 @@ If there is sufficient quantity in stock, the app will update inventory in the d
 
 **Insufficient Stock** 
 
-If selected quantity is greater than available inventory, you will be notified of insufficient stock and prompted to begin your search again. 
+If selected quantity is greater than available inventory, you will be notified of insufficient stock and prompted to begin your search again. <br>
 ![Insufficient Stock](/basicImages/Error.png)
+
+<hr>
+## Challenge 2: Manager View
+**Step 1**
