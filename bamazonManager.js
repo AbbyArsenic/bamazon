@@ -30,7 +30,7 @@ function menu() {
         return viewProducts();
 
       case "View Low Inventory":
-        return viewInventory();
+        return viewLow();
 
       case "Add to Inventory":
         return addInventory();
@@ -47,11 +47,13 @@ function viewProducts() {
     if (err) {
       console.log(err);
     }
+    console.log("\nAll available products:\n");
     for (var i=0; i<results.length; i++) {
       console.log(
         results[i].item_id + " " + 
         results[i].product_name + " [" + 
-        results[i].price + "]"
+        results[i].price + "] Qty: " + 
+        results[i].stock_quantity
       );
     }
     console.log("\n--------------\n");
@@ -61,17 +63,58 @@ function viewProducts() {
 
 // Define function to view low inventory
 function viewLow() {
-
+  connection.query('SELECT * FROM `products` WHERE `stock_quantity` < 5', function (err, results, fields) {
+    if (err) {
+      console.log(err);
+    }
+    console.log("\nYou will soon sell out of the following:\n");
+    for (var i=0; i<results.length; i++) {
+      console.log( 
+        results[i].item_id + " " + 
+        results[i].product_name + 
+        results[i].price + " [Remaining quantity: " + 
+        results[i].stock_quantity + "]"
+      );
+    }
+    console.log("\n--------------\n");
+    menu();
+  })
 };
 
 // Define function to add to current inventory
 function addInventory() {
+  inquirer.prompt( [{
+    name: "itemId",
+    type: "input",
+    message: "Enter an item ID for which to increase inventory"
+  }, {
+    name: "addQty",
+    type: "input",
+    message: "Enter quantity of items to ADD"
+  }]).then(function(answer) {
 
+  });
 };
 
+/*Below here, code is incomplete and not yet functional...
 // Define function to add a new product
 function addProduct() {
-
+  connection.query('INSERT INTO `products` (product_name, department_name, price, stock_quantity) VALUES ' + , function (err, results, fields) {
+    if (err) {
+      console.log(err);
+    }
+    console.log("\nYou will soon sell out of the following:\n");
+    for (var i=0; i<results.length; i++) {
+      console.log( 
+        results[i].item_id + " " + 
+        results[i].product_name + 
+        results[i].price + " [Remaining quantity: " + 
+        results[i].stock_quantity + "]"
+      );
+    }
+    console.log("\n--------------\n");
+    menu();
+  })
 };
 
 menu();

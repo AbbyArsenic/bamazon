@@ -48,10 +48,6 @@ connection.query('SELECT * FROM `products`', function (err, results, fields) {
             var total = parseFloat(answer.quantity*results[i].price).toFixed(2);
             var newStock = results[i].stock_quantity - answer.quantity;
 
-            // Notify user of successful purchase
-            console.log("You have purchased " + answer.quantity + " " + results[i].product_name);
-            console.log("Your order total is " + total);
-
             // Construct query to update stock
             var updateStock = 'UPDATE `products` SET `stock_quantity` = ' + newStock + ' WHERE `item_id` = ' + answer.itemId
             connection.query(updateStock, function(err, result) {
@@ -61,6 +57,10 @@ connection.query('SELECT * FROM `products`', function (err, results, fields) {
                 console.log(result.affectedRows + " product updated");
               }
             });
+
+            // Notify user of successful purchase
+            console.log("You have purchased " + answer.quantity + " " + results[i].product_name);
+            console.log("Your order total is " + total);
           }
         }
       }
