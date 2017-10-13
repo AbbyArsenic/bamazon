@@ -15,7 +15,6 @@ connection.connect(function(err) {
     console.error('error connecting: ' + err.stack);
     return;
   }
-  console.log('connected as id ' + connection.threadId);
 });
 
 function menu() {
@@ -81,7 +80,7 @@ function viewLow() {
   })
 };
 
-// Define function to add to current inventory
+// Define function to increase a product's current inventory
 function addInventory() {
   inquirer.prompt( [{
     name: "itemId",
@@ -92,28 +91,43 @@ function addInventory() {
     type: "input",
     message: "Enter quantity of items to ADD"
   }]).then(function(answer) {
-
-  });
+    var sql = "UPDATE `products` SET `stock_quantity` = `stock_quantity` + " + answer.addQty + " WHERE `item_id` = " + answer.itemId;
+    connection.query(sql, function(err, result, fields) {
+      console.log("\n" + result.affectedRows + " product updated!");
+      console.log("\n--------------\n");
+      menu();
+    })
+  })
 };
 
-/*Below here, code is incomplete and not yet functional...
 // Define function to add a new product
 function addProduct() {
-  connection.query('INSERT INTO `products` (product_name, department_name, price, stock_quantity) VALUES ' + , function (err, results, fields) {
-    if (err) {
-      console.log(err);
-    }
-    console.log("\nYou will soon sell out of the following:\n");
-    for (var i=0; i<results.length; i++) {
-      console.log( 
-        results[i].item_id + " " + 
-        results[i].product_name + 
-        results[i].price + " [Remaining quantity: " + 
-        results[i].stock_quantity + "]"
-      );
-    }
-    console.log("\n--------------\n");
-    menu();
+  // Create an inquirer prompt to retreive values to create item
+  inquirer.prompt([{
+    name: "name",
+    type: "input",
+    message: "Enter the name of the product you wish to add."
+  }, {
+    name: "dept",
+    type: "list",
+    message: "Select the department in which to list your item.", 
+    choices: ["Apparel", "Home & Kitchen", "Grocery", "Entertainment", "Seasonal"]
+  }, {
+    name: "price",
+    type: "input",
+    message: "Enter the unit price for your item."
+  }, {
+    name: "qty",
+    type: "input",
+    message: "Enter the available quantity for your item."
+  }]).then(function(answer) {
+    var sql = "INSERT INTO `products` (product_name, department_name, price, stock_quantity) VALUES ";
+    var values = "('" + answer.name + "', '" + answer.dept + "', " + answer.price + ", " + answer.qty + ")";
+    connection.query(sql + values, function(err, result, fields) {
+      console.log("\n" + result.affectedRows + " product added!");
+      console.log("\n--------------\n");
+      menu();    
+    })
   })
 };
 

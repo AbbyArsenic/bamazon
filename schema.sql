@@ -25,3 +25,6 @@ INSERT INTO products (product_name, department_name, price, stock_quantity) VALU
     ("Inflatable 6ft Spider", "Seasonal", 18.83, 204);
     
     SELECT * FROM products;
+    
+    UPDATE products SET stock_quantity = stock_quantity + 10 WHERE item_id = 1;
+    
