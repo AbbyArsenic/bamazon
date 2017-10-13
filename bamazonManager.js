@@ -22,7 +22,7 @@ function menu() {
     name: "menu",
     type: "list",
     message: "What would you like to do?",
-    choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"]
+    choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "Logout"]
   }).then(function(answer) {
     switch (answer.menu) {
       case "View Products for Sale":
@@ -36,6 +36,9 @@ function menu() {
 
       case "Add New Product":
         return addProduct();
+
+      case "Logout":
+        return logout();
     }
   });
 };
@@ -130,5 +133,9 @@ function addProduct() {
     })
   })
 };
+
+function logout() {
+  connection.end();
+}
 
 menu();

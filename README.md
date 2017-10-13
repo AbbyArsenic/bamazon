@@ -63,25 +63,36 @@ When this option is selected, a list is displayed of all products with fewer tha
 
 *Step 1*
 When this option is selected, you will be prompted to enter the id of a product you wish to update. 
+![Add to Inventory - Step 1](/managerImages/addInv1.png)
+
 
 *Step 2*
 After entering product id, you will be prompted to enter the quantity you wish to add to current inventory. 
+![Add to Inventory - Step 2](/managerImages/addInv2.png)
+![Add to Inventory - Success](/managerImages/addInvDone.png)
 
 
 **Add New Product**
 
 *Step 1*
 When this option is selected, you will be prompted to enter the name of the product you wish to create in your inventory. 
+![Add Product - Step 1](/managerImages/addProd1.png)
+
 
 *Step 2*
 Next you will be prompted to select a category in which to list the newly created product. 
+![Add Product - Step 2](/managerImages/addProd2.png)
 
 *Step 3*
 Continue by entering a unit price for your product. 
+![Add Product - Step 3](/managerImages/addProd3.png)
 
 *Step 4*
 Finally, you will be prompted to enter the quantity available for purchase for this product. 
+![Add Product - Step 4](/managerImages/addProd4.png)
+![Add Product - Success](/managerImages/addProdDone.png)
 
 
 **Log Out**
 You can end your manager session by selecting "Log Out" from the menu.
+![Logged Out](/managerImages/logout.png)
